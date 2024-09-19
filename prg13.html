@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #e9ecef;
+            margin: 0;
+        }
+        header {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        footer {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        .main-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        section {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            height: 500px;
+            max-width: 800px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .button-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="main-group">
+            <img src="屏幕截图 2024-09-08 005911.png" height="100" width="100" alt="Company Logo">
+            <h1>Euphoria Haven Leisure Club</h1>
+        </div>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Welcome to Euphoria Haven Leisure Club</h2>
+            <div class="button-container">
+                <button onclick="window.open('https:\/\/docs.google.com/document/d/1oLPufSSgk7y-67H75e1nPed5ScZK5AQZ30mqApT_DNg/edit#heading=h.fff49pa00hw7');">Report<br><img src="monitor_2782058.png" style="width:50px; height:50px "></button>
+                <button onclick="showAlert('Notification')">Notification<br><img src="alert_3732878.png" style="width:50px; height:50px"></button>
+                <button onclick="window.open('prg7.html')">Booking<br><img src="booking-online_4255215.png" style="width:50px; height:50px"></button>
+                <button onclick="window.open('prg14.html')">Calendar<br><img src="calendar.png" style="width:50px; height:50px"></button>
+                <button onclick="showAlert('Leave appointment')">Staff Leave Appointment<br><img src="ask-for-leave-1.png" style="width:50px; height:50px"></button>
+                <button onclick="window.open('prg15.html')">Membership Application<br><img src="5455701.png" style="width:50px; height:50px"></button>
+                <button onclick="showAlert('Report Problems')">Report Problems<br><img src="problem-report.png" style="width:50px; height:50px"></button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 Euphoria Haven Leisure Club
+    </footer>
+
+    <script>
+        function showAlert(buttonName) {
+            alert('You clicked on ' + buttonName);
+        }
+    </script>
+</body>
+</html>

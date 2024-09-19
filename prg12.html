@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Availability Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .container {
+            width: 80%;
+            margin: 100px auto 20px auto; /* Adjusted for space below header */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .available {
+            background-color: #d4edda;
+        }
+        .not-available {
+            background-color: #f8d7da;
+        }
+        .booked {
+            background-color: #e2e3e5;
+        }
+        input[type="date"], input[type="time"], input[type="text"] {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px); /* Adjust width for padding and border */
+        }
+        input.error {
+            border-color: red;
+        }
+        .book {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .book:hover {
+            background-color: #007bff;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .reason-form {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .reason-form input {
+            height: 100px; /* Adjust height for the reason input field */
+        }
+        .cancel{
+            width: 10%;
+            padding: 10px;
+            border: none;
+            background-color: #343a40;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        <img src="屏幕截图 2024-09-08 005911.png" height="100" width="100" alt="Logo">
+        <br></br>
+        Euphoria Haven Leisure Club
+        <br></br>
+        <a href="prg11.html" style="color:#fff">Booking Amendation</a>
+    </h1>
+    <div class="container">
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <h2>Amend Facility Booking</h2>
+        <form id="booking-form" method="post" action="#">
+            <h3>Enter booking code:</h3>
+            <input id="booking-code" type="text" placeholder="Booking Code"/>
+            <div id="bookingError" class="error-message"></div>
+        </form>
+        
+        <form id="reason-form" method="post" action="#" class="reason-form">
+            <h3>Booking Cancellation Reason:</h3>
+            <input id="cancellation-reason" type="text" placeholder="Cancellation Reason"/>    
+        </form>
+        
+        <button type="button" class="book" onclick="handleSubmit()">Submit</button>
+        <button type="button" class="cancel" onclick="cancel()" >Cancel</button>
+    </div>
+    
+    <script>
+        function handleSubmit() {
+            var bookingCode = document.getElementById("booking-code").value;
+            var bookingError = document.getElementById('bookingError');
+
+            document.getElementById('booking-code').classList.remove('error');
+            bookingError.textContent = '';
+
+            let isValid = true;
+
+            if (bookingCode === "") {
+                document.getElementById('booking-code').classList.add('error');
+                bookingError.textContent = 'Booking code cannot be empty.';
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Cancellation application sent");
+                window.location.href = "prg7.html"; 
+            }
+        }
+        function cancel()
+        {window.open("prg6.html")}
+    </script>
+</body>
+</html>
+

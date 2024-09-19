@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Password - Euphoria Haven Leisure Club</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("屏幕截图\ 2024-09-08\ 022053.png");
+            margin: 0;
+        }
+        header {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px 20;
+            text-align: center;
+            font-size: 24px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px; 
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>Euphoria Haven Leisure Club</header>
+    <h1><img src="屏幕截图 2024-09-08 005911.png" height="100" width="100"></h1>
+    <div class="container">
+        <h1>Create New Password</h1>
+        <form id="CreateNewPasswordForm">
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Password">
+                <div id="passwordError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="checkpassword">Confirm Password:</label>
+                <input type="password" id="checkpassword" name="checkpassword" placeholder="Confirm Password">
+                <div id="checkpasswordError" class="error-message"></div>
+            </div>
+            <button type="submit">Save New Password</button>
+            <p>Already have an account? <a href="prg1.html">Login</a></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('CreateNewPasswordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("checkpasswordError").textContent = "";
+
+            const password = document.getElementById("password").value;
+            const checkpassword = document.getElementById("checkpassword").value;
+
+            let isValid = true;
+
+            const OnlyNumber = /^[0-9]+$/;
+            const OnlyAlpha = /^[a-zA-Z]+$/;
+
+            if (password.length <= 8) {
+                document.getElementById("password").classList.add('error');
+                document.getElementById("passwordError").textContent = "Password must be more than 8 characters";
+                isValid = false;
+            } else if (OnlyAlpha.test(password) || OnlyNumber.test(password)) {
+                document.getElementById("password").classList.add("error");
+                document.getElementById("passwordError").textContent = "Password must be alphanumeric";
+                isValid = false;
+            } else if (checkpassword !== password) {
+                document.getElementById("checkpassword").classList.add("error");
+                document.getElementById("checkpasswordError").textContent = "Passwords do not match";
+                isValid = false;
+            } else {
+                document.getElementById("password").classList.remove("error");
+                document.getElementById("checkpassword").classList.remove("error");
+            }
+
+            if (isValid) {
+                alert("Password has been successfully created");
+                window.location.href = "prg1.html";
+            }
+        });
+    </script>
+</body>
+</html>
+

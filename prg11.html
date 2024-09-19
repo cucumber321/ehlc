@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility Availability Chart</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .available {
+            background-color: #d4edda;
+        }
+        .not-available {
+            background-color: #f8d7da;
+        }
+        .booked {
+            background-color: #e2e3e5;
+        }
+        h1 {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 80%;
+            margin: 80px auto 20px auto; 
+        }
+        .book {
+            width: 20%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="屏幕截图 2024-09-08 005911.png" height="100" width="100" alt="Logo">
+            <br></br>
+            Euphoria Haven Leisure Club
+            <br></br>
+            <a href="prg12.html" style="color:#fff">Booking Cancellation</a>
+        </h1>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <h2>Amend Booking</h2>
+        <label for="booking code">Enter Booking Code:</label>
+        <input type="text" id="code">
+        <label for="date">Select Date: </label>
+        <input type="date" id="date">
+        <label for="time">Select Time: </label>
+        <input type="time" id="time">
+        <button onclick="updateAvailability()">Check Availability</button>
+
+        <form id="bookform">
+            <table id="availabilityTable">
+                <thead>
+                    <tr>
+                        <th>Facility</th>
+                        <th>Status</th>
+                        <th>Book</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Chess Room</td>
+                        <td id="chessRoomStatus">--</td>
+                        <td><input type="checkbox" id="bookChess" name="bookChess" value="Book chess room"></td>
+                    </tr>
+                    <tr>
+                        <td>Gym Room</td>
+                        <td id="gymRoomStatus">--</td>
+                        <td><input type="checkbox" id="bookGym"></td>
+                    </tr>
+                    <tr>
+                        <td>Swimming Pool</td>
+                        <td id="swimmingPoolStatus">--</td>
+                        <td><input type="checkbox" id="bookPool"></td>
+                    </tr>
+                    <tr>
+                        <td>Badminton Court</td>
+                        <td id="badmintonCourtStatus">--</td>
+                        <td><input type="checkbox" id="bookBadminton"></td>
+                    </tr>
+                    <tr>
+                        <td>Bowling</td>
+                        <td id="bowlingStatus">--</td>
+                        <td><input type="checkbox" id="bookBowling"></td>
+                    </tr>
+                    <tr>
+                        <td>KTV Room</td>
+                        <td id="ktvRoomStatus">--</td>
+                        <td><input type="checkbox" id="bookKTV"></td>
+                    </tr>
+                    <tr>
+                        <td>Bar</td>
+                        <td id="barStatus">--</td>
+                        <td><input type="checkbox" id="bookBar"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="book">Amend</button>
+            <div id="bookError" class="error-message"></div>
+            <button type="button" onclick="cancel()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        function updateAvailability() {
+            const dateInput = document.getElementById('date').value;
+            const timeInput = document.getElementById('time').value;
+            const date = new Date(dateInput);
+            const day = date.getDay();
+            const time = timeInput ? parseInt(timeInput.split(':')[0], 10) : null;
+
+            const isWeekend = (day === 0 || day === 6);
+            const isOpenWeekday = (day >= 1 && day <= 5);
+            const isOpenSaturday = (day === 6);
+
+            function getStatus(opening, closing) {
+                if (isOpenWeekday && time >= opening && time < 14) return 'available';
+                if (isOpenWeekday && time >= 14 && time < 16) return 'booked';
+                if (isOpenWeekday && time >= 16 && time < closing) return 'available';
+                if (isOpenSaturday && time >= opening && time < closing) return 'available';
+                return 'not-available';
+            }
+
+            const facilities = {
+                chessRoom: getStatus(8, 22),
+                gymRoom: getStatus(8, 22),
+                swimmingPool: getStatus(8, 22),
+                badmintonCourt: getStatus(8, 22),
+                bowling: getStatus(8, 22),
+                ktvRoom: getStatus(8, 22),
+                bar: getStatus(8, 22)
+            };
+
+            for (let facility in facilities) {
+                const statusElement = document.getElementById(`${facility}Status`);
+                statusElement.className = facilities[facility];
+                statusElement.textContent = facilities[facility].replace('-', ' ').toUpperCase();
+            }
+        }
+
+        function cancel()
+        {window.open("prg6.html")}
+
+        document.querySelector('.book').addEventListener('click', function(event) {
+            event.preventDefault(); 
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            const errorMessage = document.getElementById('bookError');
+
+            if (isAnyChecked) {
+                errorMessage.textContent = ''; 
+                alert('Booking successful!');
+                window.open("prg6.html","_self")
+            } else {
+                errorMessage.textContent = 'Please select at least one facility to book.';
+            }
+        });
+    </script>
+</body>
+</html>
+

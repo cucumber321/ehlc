@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #e9ecef;
+            margin: 0;
+        }
+        header {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px 0;
+        }
+        footer {
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            padding: 15px 0;
+        }
+        .main-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        dl {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        dt {
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        dt:hover {
+            text-decoration: underline;
+        }
+        main {
+            display: flex;
+            flex-direction: row; /* Align children in a row */
+            justify-content: center; /* Center the sections horizontally */
+            gap: 20px; /* Add some space between the sections */
+            margin-top: 30px;
+        }
+        section {
+            text-align: center; /* Center the text inside each section */
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 40%; /* Adjust width as needed */
+            max-width: 400px; /* Make sure each section does not exceed this width */
+            height: 200px; /* Set a fixed height */
+        }
+        h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="main-group">
+            <img src="屏幕截图 2024-09-08 005911.png" height="100" width="100">
+            <h1>Euphoria Haven Leisure Club</h1>
+            <nav>
+                <dl>
+                    <dt>Home</dt>
+                    <dt>Membership</dt>
+                    <dt><a href="prg7.html" style="color: #fff;">Book Facilities </a></dt>
+                    <dt>Events</dt>
+                    <dt></dt>
+                </dl>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="form-group">
+            <p>Basic Membership</p>
+            <p>RM 40/month</p>
+            
+        </section>
+        <section class="form-group">
+            <p>Premium Membership</p>
+            <p>RM 50/month</p>
+        </section>
+    </main>
+    <br></br>
+    <button type="submit" id="pay_membership" onclick="pay_membership()">Pay membership</button>
+    <p>Apply membership? <a href="prg15.html">Click here</a></p>
+    <script>
+        function pay_membership()
+        {
+        window.location.href="prg10.html";
+        }
+    </script>
+</body>
+</html>

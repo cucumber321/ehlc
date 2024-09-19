@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .message {
+            color: #000;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .price {
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Euphoria Haven Leisure Club</h1>
+    </header>
+    <div class="container">
+        <h1>Membership Payment</h1>
+        <form id="MembershipPaymentForm">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="First Name">
+                <div id="firstNameError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+                <div id="lastNameError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="creditCardNumber">Credit Card Number:</label>
+                <input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="Credit Card Number">
+                <div id="creditCardNumberError" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="membership">Membership Type:</label>
+                <select id="membership" name="membership">
+                    <option value="basic">Basic Membership</option>
+                    <option value="premium">Premium Membership</option>
+                </select>
+                <div id="membershipChoice" class="message"></div>
+                <div id="price" class="price"></div>
+            </div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('MembershipPaymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            document.getElementById('firstNameError').textContent = "";
+            document.getElementById('lastNameError').textContent = "";
+            document.getElementById('creditCardNumberError').textContent = "";
+            document.getElementById('membershipChoice').textContent = "";
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const creditCardNumber = document.getElementById('creditCardNumber').value.trim();
+            const membership = document.getElementById('membership').value;
+
+            let isValid = true;
+
+            if (firstName.length < 2) {
+                document.getElementById('firstName').classList.add('error');
+                document.getElementById('firstNameError').textContent = 'First name must be at least 2 characters long.';
+                isValid = false;
+            } else {
+                document.getElementById('firstName').classList.remove('error');
+            }
+
+            if (lastName.length < 2) {
+                document.getElementById('lastName').classList.add('error');
+                document.getElementById('lastNameError').textContent = 'Last name must be at least 2 characters long.';
+                isValid = false;
+            } else {
+                document.getElementById('lastName').classList.remove('error');
+            }
+
+            const creditCardPattern = /^[0-9]{16}$/;
+            if (!creditCardPattern.test(creditCardNumber)) {
+                document.getElementById('creditCardNumber').classList.add('error');
+                document.getElementById('creditCardNumberError').textContent = 'Credit card number must be 16 digits long.';
+                isValid = false;
+            } else {
+                document.getElementById('creditCardNumber').classList.remove('error');
+            }
+
+            if (isValid) {
+                alert('Payment successful');
+                window.open('prg1.html', '_self');
+            }
+        });
+
+        document.getElementById('membership').addEventListener('change', function() {
+            const membership = this.value;
+            const priceElement = document.getElementById('price');
+
+            if (membership === 'basic') {
+                priceElement.textContent = 'Price: RM 40';
+            } else if (membership === 'premium') {
+                priceElement.textContent = 'Price: RM 50';
+            } else {
+                priceElement.textContent = '';
+            }
+        });
+        document.getElementById('membership').dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>
+
